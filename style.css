@@ -1,0 +1,33 @@
+@charset "utf-8";
+/* CSS Document */
+
+canvas {
+	width: 500px;
+	height: 500px;
+	padding: 0;
+}
+body {
+	font-family: Arial;
+	text-align: center;
+}
+.text {
+	text-align: justify;
+	padding-left: 30%;
+	padding-right: 30%;
+}
+.parameters {
+	font-size : 12px;
+	text-align: left;
+	padding-top: 50px;
+	padding-left: 20px;
+	width: 30%;
+	height: 100%;
+	background: #CCCCCC;
+	position: fixed;
+	top: 0;
+	right: 0;
+}
+
+.page {
+	width: 70%;
+}
