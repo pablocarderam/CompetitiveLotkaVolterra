@@ -10,6 +10,10 @@ body {
 	font-family: Arial;
 	text-align: center;
 }
+a {
+	text-decoration:none;
+}
+
 .text {
 	text-align: justify;
 	padding-left: 30%;
