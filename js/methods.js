@@ -18,40 +18,49 @@ function drawTimeSeries() {
 }
 
 function drawIsoclines() {
-    maxX = Math.max(maxA,kA,kB/alphaBA);
-    maxY = Math.max(maxB,kB,kA/alphaAB);
-    var propA = new Array(popA.length);
-    var propB = new Array(popB.length);
-    for (var i = 0; i < propA.length; i++) {
-        propA[i] = centerY*2*(popA[i]/maxX); // on X axis
-        propB[i] = centerY*2*(1-popB[i]/maxY);
+    if (alphaBA == 0 || alphaAB == 0) {
+        clearStage();
+        ctx.fillStyle = "#000000"; // erase stage
+        ctx.fillText("No se pueden graficar nulclinas", centerX-60, centerY-20);
+        ctx.fillText("para los casos alfa_AB=0 y alfa_BA=0", centerX-70, centerY);
+        ctx.fillText("(incluyendo el modelo logístico).", centerX-60, centerY+20);
     }
-    clearStage();
-    ctx.lineWidth = 2;
-	ctx.lineCap = 'round';
-	ctx.lineJoin = 'round';
+    else {
+        maxX = Math.max(maxA,kA,kB/alphaBA);
+        maxY = Math.max(maxB,kB,kA/alphaAB);
+        var propA = new Array(popA.length);
+        var propB = new Array(popB.length);
+        for (var i = 0; i < propA.length; i++) {
+            propA[i] = centerY*2*(popA[i]/maxX); // on X axis
+            propB[i] = centerY*2*(1-popB[i]/maxY);
+        }
+        clearStage();
+        ctx.lineWidth = 2;
+    	ctx.lineCap = 'round';
+    	ctx.lineJoin = 'round';
 
-	ctx.strokeStyle = '#339900'; // draw A isocline
-	ctx.beginPath();
-    ctx.moveTo(0, centerY*2*(1-(kA/alphaAB)/maxY)); // move line from last point...
-    ctx.lineTo(centerX*2*kA/maxX, centerY*2); // ...to next
-	ctx.stroke();
+    	ctx.strokeStyle = '#339900'; // draw A isocline
+    	ctx.beginPath();
+        ctx.moveTo(0, centerY*2*(1-(kA/alphaAB)/maxY)); // move line from last point...
+        ctx.lineTo(centerX*2*kA/maxX, centerY*2); // ...to next
+    	ctx.stroke();
 
-    ctx.strokeStyle = '#FF0000'; // draw B isocline
-	ctx.beginPath();
-    ctx.moveTo(0, centerY*2*(1-kB/maxY)); // move line from last point...
-    ctx.lineTo(centerX*2*(kB/alphaBA)/maxX, centerY*2); // ...to next
-	ctx.stroke();
+        ctx.strokeStyle = '#FF0000'; // draw B isocline
+    	ctx.beginPath();
+        ctx.moveTo(0, centerY*2*(1-kB/maxY)); // move line from last point...
+        ctx.lineTo(centerX*2*(kB/alphaBA)/maxX, centerY*2); // ...to next
+    	ctx.stroke();
 
-    ctx.strokeStyle = '#FF9900'; // draw initial point
-    ctx.fillStyle = '#FF9900';
-    ctx.beginPath();
-    ctx.arc(centerX*2*popA0/maxX, centerY*2*(1-popB0/maxY), 2, 0, 2 * Math.PI, false);
-    ctx.fill();
-    ctx.stroke();
-    graphData(propA,propB,'#FF9900'); // Graph path of population
+        ctx.strokeStyle = '#FF9900'; // draw initial point
+        ctx.fillStyle = '#FF9900';
+        ctx.beginPath();
+        ctx.arc(centerX*2*popA0/maxX, centerY*2*(1-popB0/maxY), 2, 0, 2 * Math.PI, false);
+        ctx.fill();
+        ctx.stroke();
+        graphData(propA,propB,'#FF9900'); // Graph path of population
 
-    drawAxis("Población A",0,maxX,"Población B",0,maxY);
+        drawAxis("Población A",0,maxX,"Población B",0,maxY);
+    }
 }
 
 function dA_dt(t,A,B) {
@@ -155,9 +164,8 @@ function updateTStep(newVal) {
 }
 
 function logBtnHandler(newVal) {
-    popB0 = 0;
-    kB = 0;
-    rB = 0;
     alphaAB = 0;
     alphaBA = 0;
+    document.getElementById('alpha_ABField').value = 0;
+    document.getElementById('alpha_BAField').value = 0;
 }
