@@ -16,13 +16,13 @@ var killSwitch = true;
 var viewMode = TIME_SERIES;
 
 // Model parameters and vars
-var tStep = 0.01;
+var tStep = 0.02;
 var popA0 = 10000;
-var popB0 = 10000;
+var popB0 = 2000;
 var kA = 10000;
 var kB = 10000;
 var rA = 1.5;
-var rB = 1.5;
+var rB = 2;
 var alphaAB = 0.5;
 var alphaBA = 0.5;
 
