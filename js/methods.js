@@ -39,13 +39,13 @@ function drawIsoclines() {
     	ctx.lineCap = 'round';
     	ctx.lineJoin = 'round';
 
-    	ctx.strokeStyle = '#FF0000'; // draw A isocline
+    	ctx.strokeStyle = '#FF0000'; // draw B isocline
         ctx.beginPath();
         ctx.moveTo(0, centerY*2*(1-kB/maxY)); // move line from last point...
         ctx.lineTo(centerX*2*(kB/alphaBA)/maxX, centerY*2); // ...to next
     	ctx.stroke();
 
-        ctx.strokeStyle = '#339900'; // draw B isocline
+        ctx.strokeStyle = '#339900'; // draw A isocline
         ctx.beginPath();
         ctx.moveTo(0, centerY*2*(1-(kA/alphaAB)/maxY)); // move line from last point...
         ctx.lineTo(centerX*2*kA/maxX, centerY*2); // ...to next
